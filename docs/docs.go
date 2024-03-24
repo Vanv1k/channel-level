@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/channel-level": {
+        "/code": {
             "post": {
                 "description": "Используется для передачи данных через канальный уровень с учетом возможности ошибок и потерь.",
                 "consumes": [
@@ -43,22 +43,25 @@ const docTemplate = `{
                     "200": {
                         "description": "Успешный ответ",
                         "schema": {
-                            "$ref": "#/definitions/server.Segment"
+                            "$ref": "#/definitions/server.ResponseMessage"
                         }
                     },
                     "204": {
-                        "description": "Пакет утерян"
+                        "description": "Пакет утерян",
+                        "schema": {
+                            "$ref": "#/definitions/server.ResponseMessage"
+                        }
                     },
                     "400": {
                         "description": "Некорректный запрос",
                         "schema": {
-                            "$ref": "#/definitions/server.ErrorResponse"
+                            "$ref": "#/definitions/server.ResponseMessage"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/server.ErrorResponse"
+                            "$ref": "#/definitions/server.ResponseMessage"
                         }
                     }
                 }
@@ -66,7 +69,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "server.ErrorResponse": {
+        "server.ResponseMessage": {
             "type": "object",
             "properties": {
                 "message": {

@@ -1,6 +1,6 @@
 basePath: /
 definitions:
-  server.ErrorResponse:
+  server.ResponseMessage:
     properties:
       message:
         type: string
@@ -24,7 +24,7 @@ info:
   title: Channel Level API
   version: "1.0"
 paths:
-  /channel-level:
+  /code:
     post:
       consumes:
       - application/json
@@ -43,17 +43,19 @@ paths:
         "200":
           description: Успешный ответ
           schema:
-            $ref: '#/definitions/server.Segment'
+            $ref: '#/definitions/server.ResponseMessage'
         "204":
           description: Пакет утерян
+          schema:
+            $ref: '#/definitions/server.ResponseMessage'
         "400":
           description: Некорректный запрос
           schema:
-            $ref: '#/definitions/server.ErrorResponse'
+            $ref: '#/definitions/server.ResponseMessage'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/server.ErrorResponse'
+            $ref: '#/definitions/server.ResponseMessage'
       summary: Передача данных через канальный уровень с учетом ошибок и потерь
       tags:
       - Channel

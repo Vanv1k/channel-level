@@ -10,7 +10,7 @@ import (
 
 func Start() {
 	router := gin.Default()
-	router.POST("/channel-level", handleEncoding)
+	router.POST("/code", handleEncoding)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.Run(":5000")
 }
