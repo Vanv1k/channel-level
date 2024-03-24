@@ -1,0 +1,60 @@
+basePath: /
+definitions:
+  server.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  server.Segment:
+    properties:
+      id:
+        type: string
+      payload:
+        type: string
+      segment_index:
+        type: integer
+      total_length:
+        type: integer
+    type: object
+host: localhost:5000
+info:
+  contact: {}
+  description: API для передачи данных через канал с использованием кодирования Хэммингом
+    (7,4)
+  title: Channel Level API
+  version: "1.0"
+paths:
+  /channel-level:
+    post:
+      consumes:
+      - application/json
+      description: Используется для передачи данных через канальный уровень с учетом
+        возможности ошибок и потерь.
+      parameters:
+      - description: Данные для передачи
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/server.Segment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный ответ
+          schema:
+            $ref: '#/definitions/server.Segment'
+        "204":
+          description: Пакет утерян
+        "400":
+          description: Некорректный запрос
+          schema:
+            $ref: '#/definitions/server.ErrorResponse'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/server.ErrorResponse'
+      summary: Передача данных через канальный уровень с учетом ошибок и потерь
+      tags:
+      - Channel
+swagger: "2.0"
