@@ -58,6 +58,9 @@ func handleEncoding(c *gin.Context) {
 		return
 	}
 	log.Println(decodeError)
+	log.Println(responseData)
+	responseData["error"] = decodeError
+	log.Println(responseData)
 	reqBody := &bytes.Buffer{}
 	if err := json.NewEncoder(reqBody).Encode(responseData); err != nil {
 		c.JSON(500, ResponseMessage{Message: "Ошибка при подготовке данных к отправке"})
@@ -69,7 +72,7 @@ func handleEncoding(c *gin.Context) {
 
 	apiUrl := os.Getenv("API_URL")
 	log.Println("URL API:", apiUrl)
-
+	log.Println(reqBody)
 	resp, err := http.Post(apiUrl, "application/json", reqBody)
 	if err != nil {
 		c.JSON(400, ResponseMessage{Message: "Ошибка при отправке сегмента на эндпоинт"})
