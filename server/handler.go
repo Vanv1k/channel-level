@@ -79,7 +79,7 @@ func handleEncoding(c *gin.Context) {
 	}
 
 	defer resp.Body.Close()
-
+	log.Println(resp.StatusCode)
 	if resp.StatusCode != http.StatusOK {
 		c.JSON(400, ResponseMessage{Message: "Ошибка: неверный код состояния ответа"})
 		return
