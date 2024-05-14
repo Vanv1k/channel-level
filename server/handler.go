@@ -14,7 +14,7 @@ import (
 )
 
 type Segment struct {
-	ID           string `json:"id"`
+	ID           int    `json:"id"`
 	TotalLength  int    `json:"total_length"`
 	SegmentIndex int    `json:"segment_index"`
 	Payload      string `json:"payload"`
@@ -82,6 +82,7 @@ func handleEncoding(c *gin.Context) {
 
 	if resp.StatusCode != http.StatusOK {
 		c.JSON(400, ResponseMessage{Message: "Ошибка: неверный код состояния ответа"})
+		return
 	}
 
 	c.JSON(200, ResponseMessage{Message: "Сегмент успешно отправлен"})
