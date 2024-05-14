@@ -14,9 +14,9 @@ import (
 )
 
 type Segment struct {
-	ID           int    `json:"id"`
-	TotalLength  int    `json:"total_length"`
-	SegmentIndex int    `json:"segment_index"`
+	ID           int    `json:"time"`
+	TotalLength  int    `json:"total"`
+	SegmentIndex int    `json:"number"`
 	Payload      string `json:"payload"`
 }
 
